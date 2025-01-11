@@ -17,12 +17,15 @@ def split_nodes_delimiter(old_nodes: List[TextNode], delimiter: str, text_type: 
 
     return new_nodes
 
+
 def extract_markdown_images(text: str) -> List[Tuple[str, str]]:
-    matches: List[Tuple[str, str]] = re.findall(r"\[(.*?)\]\((.*?)\)", text)
+    pattern = r"!\[([^\[\]]*)\]\(([^\(\)]*)\)"
+    matches: List[Tuple[str, str]] = re.findall(pattern, text)
     return list(matches)
 
 def extract_markdown_links(text: str) -> List[Tuple[str, str]]:
-    matches: List[Tuple[str, str]] = re.findall(r" \[(.*?)\]\((.*?)\)", text)
+    pattern = r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)"
+    matches: List[Tuple[str, str]] = re.findall(pattern, text)
     return list(matches)
 
 def split_text_delimiter(text: str, delimiter: str) -> List[str]:
