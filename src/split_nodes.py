@@ -6,11 +6,11 @@ def text_to_textnodes(text: str) -> List[TextNode]:
     nodes = split_nodes_image(split_nodes_link([TextNode(text, TextType.TEXT)]))
     nodes = split_nodes_delimiter(nodes, '`', TextType.CODE)
     nodes = split_nodes_delimiter(nodes, '**', TextType.BOLD)
-    nodes = split_nodes_delimiter(nodes, '*', TextType.ITALIC)
+    nodes = split_nodes_delimiter(nodes, '_', TextType.ITALIC)
     return nodes
 
 def split_nodes_delimiter(old_nodes: List[TextNode], delimiter: str, text_type: TextType) -> List[TextNode]:
-    if delimiter not in ['`', '**', '*']:
+    if delimiter not in ['`', '**', '_']:
         ValueError("Not supported delimiter")
     new_nodes: List[TextNode] = []
     for node in old_nodes:

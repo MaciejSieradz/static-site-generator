@@ -6,7 +6,7 @@ from textnode import TextNode, TextType
 class TestSplitNodesDelimiter(unittest.TestCase):
 
     def test_text_to_textnodes(self):
-        text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        text = "This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
         expect = [
             TextNode("This is ", TextType.TEXT),
             TextNode("text", TextType.BOLD),
@@ -23,7 +23,7 @@ class TestSplitNodesDelimiter(unittest.TestCase):
         self.assertListEqual(expect, text_to_textnodes(text))
 
     def test_text_to_textnodes_no_links_no_images(self):
-        text = "This is **text** with an *italic* word and a `code block`."
+        text = "This is **text** with an _italic_ word and a `code block`."
         expect = [
             TextNode("This is ", TextType.TEXT),
             TextNode("text", TextType.BOLD),

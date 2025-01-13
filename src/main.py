@@ -1,9 +1,20 @@
-from split_nodes import split_nodes_images
-from textnode import TextNode, TextType
+import os, shutil
 
+from generate_page import copy_content, generate_page, generate_pages_recursive
+
+dir_path_static = "./static"
+dir_path_public = "./public"
 
 def main():
-    text = TextNode("This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)", TextType.TEXT)
-    print(split_nodes_images([text]))
+    print("Deleting public directory...")
+    if os.path.exists("./public"):
+        shutil.rmtree("./public")
+
+    print("Copying static files to public directory...")
+    copy_content(dir_path_static, dir_path_public)
+    print("Done!")
+
+    generate_pages_recursive("./content", "./template.html", "./public")
+
 if __name__ == "__main__":
     main()
